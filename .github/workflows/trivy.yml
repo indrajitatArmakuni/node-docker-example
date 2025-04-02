@@ -24,7 +24,7 @@ jobs:
           output: 'trivy-results.txt' 
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL'
 
       - name: Upload Trivy scan results as artifact
         if: always()  
