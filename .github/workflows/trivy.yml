@@ -14,6 +14,9 @@ jobs:
         
       - name: Build an image from Dockerfile
         run:  docker pull nginx:latest                              #docker build -t 'my-app:${{ github.sha }}' .
+
+      - name: Set current datetime as env variable
+        run: echo "DATETIME=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
         
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
@@ -21,16 +24,16 @@ jobs:
           image-ref: 'nginx:latest'                                 #'my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
-          output: 'trivy-results.txt' 
+          output: 'trivy-results-${{ env.DATETIME }}.txt'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results as artifact
         if: always()  
         uses: actions/upload-artifact@v4
         with:
           name: trivy-scan-results
-          path: trivy-results.txt
+          path: 'trivy-results-${{ env.DATETIME }}.txt'
           
    
