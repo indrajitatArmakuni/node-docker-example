@@ -21,8 +21,15 @@ jobs:
           image-ref: 'my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
+          output: 'trivy-results.txt' 
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-scan-results
+          path: trivy-results.txt
           
    
