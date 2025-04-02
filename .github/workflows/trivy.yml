@@ -21,7 +21,7 @@ jobs:
           image-ref: 'nginx:latest'                                 #'my-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
-          output: 'trivy-results.txt' 
+         # output: 'trivy-results.txt' 
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
