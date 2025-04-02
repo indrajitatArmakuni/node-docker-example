@@ -20,7 +20,7 @@ jobs:
         with:
           image-ref: 'my-app:${{ github.sha }}'
           format: 'table'
-          exit-code: '1'
+          exit-code: '2'
           output: 'trivy-results.txt' 
           ignore-unfixed: true
           vuln-type: 'os,library'
