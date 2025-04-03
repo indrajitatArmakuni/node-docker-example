@@ -37,7 +37,7 @@ jobs:
         run: |
           OUTPUT_FILE="GitHub_Actions/Trivy_Automation/scan-results-${{ env.DATE }}.txt"
           mkdir -p "GitHub_Actions/Trivy_Automation"
-          trivy image --format table --ignore-unfixed true --vuln-type os,library --severity CRITICAL -o "$OUTPUT_FILE"  --exit-code 1 nginx:latest
+          trivy image --format table --vuln-type os,library --severity CRITICAL -o "$OUTPUT_FILE"  --exit-code 1 nginx:latest
 
       - name: Upload Trivy Scan Results (as Artifact)
         if: always()  
